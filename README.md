@@ -84,27 +84,10 @@ python app.py
 ```
 API accessible at `http://127.0.0.1:5000`
 
-### Streamlit Dashboard (Prediction + Monitoring)
+### Streamlit App (Prediction + Monitoring + Model Comparison)
 ```bash
 streamlit run streamlit_app.py
 ```
-
-### Separate Model Comparison Dashboard (Notebook Reference)
-
-A dedicated dashboard for graphs, charts, and side-by-side comparison of the three tuned models is available in `Dashboard/`.
-
-Run from project root:
-
-```bash
-streamlit run Dashboard/model_comparison_dashboard.py
-```
-
-This dashboard compares:
-- Logistic Regression (`Model_DIR/best_logistic_regression_rs_model.joblib`)
-- Neural Network (`Model_DIR/best_nn_model.joblib`)
-- XGBoost (`Model_DIR/best_xgboost_model.joblib`)
-
-For details, see `Dashboard/README.md`.
 
 The Streamlit app has three separate sections (selected from sidebar `Dashboard Section`):
 
@@ -136,9 +119,24 @@ The Streamlit app has three separate sections (selected from sidebar `Dashboard 
 - Uses local `credit_card.csv` (or uploaded CSV) for evaluation
 - Compares Precision, Recall, F1, PR-AUC, ROC-AUC, false positives/negatives, and business cost
 - Shows PR/ROC curves, threshold sensitivity chart, and confusion matrices
+- Provides winner summary based on selected ranking metric
+- Supports sampled evaluation for faster rendering on large datasets
 - Supports CSV export of model comparison summary
 
 Separating these sections prevents fast monitoring refresh from interrupting user input while entering transaction details.
+
+### Standalone Model Comparison Dashboard (Notebook Reference)
+
+A dedicated dashboard for model comparison is also available in `Dashboard/`:
+
+Run from project root:
+
+```bash
+streamlit run Dashboard/model_comparison_dashboard.py
+```
+
+
+This standalone page uses the same model-comparison component as the integrated `Model Comparison` section in `streamlit_app.py`.
 
 #### Quick Tour (First-Time Users)
 
@@ -169,11 +167,13 @@ Use this short flow to explore the app end-to-end:
   - Performance (`Avg Fraud Probability`, `Avg Latency (ms)`)
   - `Recent Alerts` table
   - `Recent Events` table
-10. Turn on `Auto-refresh dashboard` only when actively monitoring live traffic.
+10. Switch to **Model Comparison** to evaluate all three tuned models on `credit_card.csv`.
+11. Turn on `Auto-refresh dashboard` only when actively monitoring live traffic.
 
 Recommended screenshots for documentation:
 - Prediction Input view with filled transaction fields and prediction result
 - Monitoring & Alerts view showing metric cards and at least one alert row
+- Model Comparison view with summary table and PR/ROC charts
 
 **Production** (Using Gunicorn):
 ```bash

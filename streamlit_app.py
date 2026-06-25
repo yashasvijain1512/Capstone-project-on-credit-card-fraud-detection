@@ -7,6 +7,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+from Dashboard.model_comparison_page import render_model_comparison_page
+
 
 MODEL_PATH = "final_model.joblib"
 SCALER_PATH = "scaler_for_api.joblib"
@@ -96,7 +98,7 @@ st.caption("Model: final_model.joblib (Tuned XGBoost) | Preprocessing: scale Tim
 
 view_mode = st.sidebar.radio(
     "Dashboard Section",
-    ["Prediction Input", "Monitoring & Alerts"],
+    ["Prediction Input", "Monitoring & Alerts", "Model Comparison"],
     index=0,
 )
 
@@ -143,7 +145,7 @@ if view_mode == "Prediction Input":
         st.write(f"Expected feature count: {len(expected_columns)}")
         st.write(expected_columns)
 
-else:
+elif view_mode == "Monitoring & Alerts":
     st.sidebar.header("Monitoring Settings")
     api_base_url = st.sidebar.text_input("API Base URL", value=DEFAULT_API_BASE_URL)
     window_minutes = st.sidebar.slider("Summary Window (minutes)", min_value=1, max_value=120, value=15)
@@ -227,5 +229,8 @@ else:
         )
     except Exception as exc:
         st.error(f"Failed to load monitoring dashboard: {exc}")
+
+else:
+    render_model_comparison_page(show_title=True)
 
     

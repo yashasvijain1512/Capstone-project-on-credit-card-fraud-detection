@@ -106,7 +106,7 @@ This dashboard compares:
 
 For details, see `Dashboard/README.md`.
 
-The Streamlit app has two separate sections (selected from sidebar `Dashboard Section`):
+The Streamlit app has three separate sections (selected from sidebar `Dashboard Section`):
 
 1. **Prediction Input**
 - Manual transaction input (`Time`, `V1`-`V28`, `Amount`)
@@ -127,6 +127,16 @@ The Streamlit app has two separate sections (selected from sidebar `Dashboard Se
   - `Avg Latency (ms)`
 - `Recent Alerts` table: only rows with `is_alert = true`
 - `Recent Events` table: full event feed including `status`, `error_message`, and `is_alert`
+
+3. **Model Comparison**
+- Loads tuned models from `Model_DIR/`:
+  - `best_logistic_regression_rs_model.joblib`
+  - `best_nn_model.joblib`
+  - `best_xgboost_model.joblib`
+- Uses local `credit_card.csv` (or uploaded CSV) for evaluation
+- Compares Precision, Recall, F1, PR-AUC, ROC-AUC, false positives/negatives, and business cost
+- Shows PR/ROC curves, threshold sensitivity chart, and confusion matrices
+- Supports CSV export of model comparison summary
 
 Separating these sections prevents fast monitoring refresh from interrupting user input while entering transaction details.
 

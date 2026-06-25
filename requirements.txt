@@ -570,6 +570,7 @@ statsmodels==0.14.6
 strictyaml==1.7.3
 stringzilla==4.6.2
 stumpy==1.13.0
+streamlit==1.37.1
 sympy==1.14.0
 tables==3.10.2
 tabulate==0.9.0

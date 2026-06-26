@@ -5,12 +5,17 @@ A production-ready API for detecting fraudulent credit card transactions using a
 ## Overview
 
 This project provides a fraud detection pipeline that:
+- Exploratory Data Analysis
+- Model training, fine tuning and evaluation
 - Predicts fraud probability for credit card transactions
-- Exposes predictions through a REST API (`/predict`)
-- Stores request telemetry (prediction, probability, latency, errors) in SQLite for observability
+- Exposes predictions through a REST API (/predict)
+- Stores request telemetry (prediction, probability, latency, errors) in for observability
 - Exposes monitoring APIs for live metrics and event feeds
 - Uses an optimized XGBoost classifier trained on imbalanced transaction data
-- Scales transaction features (`Time`, `Amount`) using StandardScaler
+- Scales transaction features (Time, Amount) using StandardScaler
+- Real time Monitoring and alert system
+- Model comparison Dashboards
+
 
 ## Dataset & Features
 
